@@ -1,3 +1,4 @@
+from typing import Any
 import uuid
 from loguru import logger
 
@@ -10,6 +11,7 @@ class LvObject(list):
             "-", "_"
         )
         self.parent = parent
+        self._attribute = {}
 
         self.children(**kwargs)
         self.build()
@@ -42,7 +44,10 @@ class LvObject(list):
 
     @property
     def attributes(self):
-        return {}
+        return self._attribute
+    
+    def __setitem__(self, __name: str, __value: Any) -> None:
+        self._attribute[__name] = __value
 
     @property
     def full_name(self):
