@@ -5,7 +5,7 @@ class bar(LvObject):
     def __init__(self, parent=None, value=0, **kwargs) -> None:
         super().__init__(parent, **kwargs)
 
-        self["lv_bar_create"] = [value]
+        self["lv_bar_set_value"] = [value, "LV_ANIM_OFF"]
 
     @property
     def create_func(self):
