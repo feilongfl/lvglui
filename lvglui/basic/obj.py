@@ -45,9 +45,12 @@ class LvObject(list):
     @property
     def attributes(self):
         return self._attribute
-    
+
     def __setitem__(self, __name: str, __value: Any) -> None:
         self._attribute[__name] = __value
+
+    def __getitem__(self, __name: str) -> None:
+        return self._attribute[__name]
 
     @property
     def full_name(self):
@@ -56,17 +59,22 @@ class LvObject(list):
 
         return f"{self.parent.full_name}/{self.name}"
 
+    @property
+    def raw_attribute(self):
+        return None
+
     def define(self):
         define_map = [
             "",
             f"/* lvglui: {self.__class__.__name__}: {self.full_name} */",
             f"{self.typedef} {self.name} = {self.create_func}({self.parent});",
         ]
-
+        define_map.append(self.raw_attribute) if self.raw_attribute is not None else ""
         define_map.extend(
             [
                 f"{k}({','.join([self.name, *(str(x) for x in v)])});"
                 for k, v in self.attributes.items()
+                if not k.startswith("__")
             ]
         )
         logger.debug(f"define: {self}: {define_map}")
