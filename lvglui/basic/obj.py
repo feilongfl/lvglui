@@ -72,9 +72,16 @@ class LvObject(list):
         define_map.append(self.raw_attribute) if self.raw_attribute is not None else ""
         define_map.extend(
             [
+                f"{k[1:]}({','.join([*(str(x) for x in v)])});"
+                for k, v in self.attributes.items()
+                if k.startswith("@")
+            ]
+        )
+        define_map.extend(
+            [
                 f"{k}({','.join([self.name, *(str(x) for x in v)])});"
                 for k, v in self.attributes.items()
-                if not k.startswith("__")
+                if not k.startswith(("__", "@"))
             ]
         )
         logger.debug(f"define: {self}: {define_map}")
