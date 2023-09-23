@@ -1,8 +1,7 @@
-from ..basic import Obj
+from ..basic import LvObject
 
 
-class Button(Obj):
-    def __init__(self, parent=None, **kwargs) -> None:
-        super().__init__(parent, **kwargs)
-
-        self.createFunc = "lv_btn_create"
+class Button(LvObject):
+    @property
+    def createFunc(self):
+        return "lv_btn_create"

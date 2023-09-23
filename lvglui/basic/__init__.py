@@ -1,1 +1,1 @@
-from .obj import Obj
+from .obj import LvObject

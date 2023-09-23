@@ -1,20 +1,23 @@
-from ..basic import Obj
+from ..basic import LvObject
 
 
-class Label(Obj):
+class Label(LvObject):
     def __init__(self, parent=None, text="", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 
-        self.createFunc = "lv_label_create"
         self.text = text
+
+    @property
+    def create_func(self):
+        return "lv_label_create"
 
     def _setText(self) -> str:
         return f"""	lv_label_set_text({self.name}, "{self.text}");"""
 
-    def Define(self):
+    def define(self):
         return "\n".join(
             [
-                super().Define(),
+                super().define(),
                 self._setText(),
             ]
         )

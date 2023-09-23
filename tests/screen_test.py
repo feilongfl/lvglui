@@ -3,7 +3,7 @@ from loguru import logger
 
 
 class DemoScreen(lvglui.core.Screen):
-    def Build(self):
+    def build(self):
         self.extend(
             [
                 lvglui.core.Label(self, "Hello"),
@@ -17,11 +17,15 @@ class DemoScreen(lvglui.core.Screen):
                 ),
             ]
         )
-        self.Artibute["lv_obj_set_flex_flow"] = ["LV_FLEX_FLOW_COLUMN"]
+        # self.attributes["lv_obj_set_flex_flow"] = ["LV_FLEX_FLOW_COLUMN"]
+
+    @property
+    def attributes(self):
+        return {"lv_obj_set_flex_flow": ["LV_FLEX_FLOW_COLUMN"]}
 
 
 def test_screen(caplog):
-    c = DemoScreen(name="demo_scn").Generate()
+    c = DemoScreen(name="demo_scn").generate()
     # logger.debug("Code Generate:\n" + c)
     with open("gen/demoscreen.c", "w") as f:
         f.write(
