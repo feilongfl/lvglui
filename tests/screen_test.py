@@ -1,5 +1,4 @@
 import lvglui
-from loguru import logger
 
 
 class DemoScreen(lvglui.core.Screen):
@@ -24,7 +23,7 @@ class DemoScreen(lvglui.core.Screen):
 
 
 def test_screen(caplog):
-    c = DemoScreen(name="demo_scn").generate()
+    scn = DemoScreen(name="demo_scn")
     with open("gen/demoscreen.c", "w") as f:
         f.write(
             """
@@ -32,10 +31,10 @@ lv_obj_t *lvui_screen_create(lv_obj_t *parent)
 {
 """
         )
-        f.write(c)
+        f.write(scn.generate())
         f.write(
             """
-	return demo_scn;
+	return %s;
 }
-"""
+""" % scn.name
         )
