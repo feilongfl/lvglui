@@ -1,7 +1,7 @@
 from ..basic import LvObject
 
 
-class Label(LvObject):
+class label(LvObject):
     def __init__(self, parent=None, text="", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 

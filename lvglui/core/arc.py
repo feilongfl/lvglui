@@ -1,7 +1,7 @@
 from ..basic import LvObject
 
 
-class Arc(LvObject):
+class arc(LvObject):
     def __init__(self, parent=None, value=0, **kwargs) -> None:
         super().__init__(parent, **kwargs)
 

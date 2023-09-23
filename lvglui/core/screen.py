@@ -1,5 +1,5 @@
 from ..basic import LvObject
 
 
-class Screen(LvObject):
+class screen(LvObject):
     pass

@@ -1,7 +1,7 @@
 from ..basic import LvObject
 
 
-class Bar(LvObject):
+class bar(LvObject):
     def __init__(self, parent=None, value=0, **kwargs) -> None:
         super().__init__(parent, **kwargs)
 
