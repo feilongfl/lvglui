@@ -61,5 +61,6 @@
       "bold": false,
       "italic": false
     }
-  ]
+  ],
+  "editor.formatOnSave": true
 }
