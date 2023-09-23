@@ -17,7 +17,6 @@ class DemoScreen(lvglui.core.Screen):
                 ),
             ]
         )
-        # self.attributes["lv_obj_set_flex_flow"] = ["LV_FLEX_FLOW_COLUMN"]
 
     @property
     def attributes(self):
@@ -26,7 +25,6 @@ class DemoScreen(lvglui.core.Screen):
 
 def test_screen(caplog):
     c = DemoScreen(name="demo_scn").generate()
-    # logger.debug("Code Generate:\n" + c)
     with open("gen/demoscreen.c", "w") as f:
         f.write(
             """
