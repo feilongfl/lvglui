@@ -1,7 +1,7 @@
 import lvglui
 
 
-class DemoScreen(lvglui.core.Screen):
+class DemoScreen(lvglui.core.screen):
     def build(self):
         self["lv_obj_set_flex_flow"] = ["LV_FLEX_FLOW_COLUMN"]
         self["lv_obj_set_flex_align"] = [
@@ -12,12 +12,12 @@ class DemoScreen(lvglui.core.Screen):
 
         self.extend(
             [
-                lvglui.core.Label(self, "Hello World"),
-                lvglui.core.Button(
+                lvglui.core.label(self, "Hello World"),
+                lvglui.core.button(
                     self,
                     name="btn",
                     children=[
-                        lvglui.core.Label(self, "Click"),
+                        lvglui.core.label(self, "Click"),
                     ],
                 ),
             ]
