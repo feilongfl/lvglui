@@ -59,7 +59,10 @@ class LvObject(list):
         ]
 
         define_map.extend(
-            [f"{k}({','.join([self.name, *v])});" for k, v in self.attributes.items()]
+            [
+                f"{k}({','.join([self.name, *(str(x) for x in v)])});"
+                for k, v in self.attributes.items()
+            ]
         )
         logger.debug(f"define: {self}: {define_map}")
 
