@@ -46,7 +46,10 @@ class LvObject(list):
         return self._attribute
 
     def __setitem__(self, __name: str, __value: Any) -> None:
-        self._attribute[__name] = __value
+        if isinstance(__value, list):
+            self._attribute[__name] = __value
+        else:
+            self._attribute[__name] = [__value]
 
     def __getitem__(self, __name: str) -> None:
         return self._attribute[__name]
