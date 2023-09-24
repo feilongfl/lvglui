@@ -1,7 +1,5 @@
 from typing import Any
 import uuid
-from deprecated import deprecated
-from loguru import logger
 
 OBJ_NAME_PREFIX = "lvglobj_"
 
@@ -64,32 +62,6 @@ class LvObject(list):
     def raw_attribute(self):
         return None
 
-    @deprecated
-    def define(self):
-        define_map = [
-            "",
-            f"/* lvglui: {self.__class__.__name__}: {self.full_name} */",
-            f"{self.typedef} {self.name} = {self.create_func}({self.parent});",
-        ]
-        define_map.append(self.raw_attribute) if self.raw_attribute is not None else ""
-        define_map.extend(
-            [
-                f"{k[1:]}({','.join([*(str(x) for x in v)])});"
-                for k, v in self.attributes.items()
-                if k.startswith("@")
-            ]
-        )
-        define_map.extend(
-            [
-                f"{k}({','.join([self.name, *(str(x) for x in v)])});"
-                for k, v in self.attributes.items()
-                if not k.startswith(("__", "@"))
-            ]
-        )
-        logger.debug(f"define: {self}: {define_map}")
-
-        return "\n    ".join(define_map)
-
     def build(self):
         pass
 
@@ -110,8 +82,3 @@ class LvObject(list):
 
     def __str__(self):
         return self.name
-
-    @deprecated
-    def generate(self):
-        logger.debug(f"generate call: {self}: children->{[obj.name for obj in self]}")
-        return self.define() + "\n" + "\n".join([obj.generate() for obj in self])
