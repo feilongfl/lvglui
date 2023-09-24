@@ -36,7 +36,7 @@ lv_obj_t *lvui_screen_create(lv_obj_t *parent)
         f.write(scn.generate())
         f.write(
             """
-	return %s;
+\treturn %s;
 }
 """
             % scn.name
