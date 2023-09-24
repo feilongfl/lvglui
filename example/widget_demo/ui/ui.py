@@ -29,6 +29,7 @@ class DemoScreen(lvglui.core.screen):
                 "Table",
                 "TextArea",
             ],
+            roller_mode="LV_ROLLER_MODE_INFINITE",
         )
         roller["lv_roller_set_visible_row_count"] = 6
 
