@@ -2,11 +2,11 @@ from ..basic import LvObject
 
 
 class roller(LvObject):
-    def __init__(self, parent=None, drop_opt=[], **kwargs) -> None:
+    def __init__(self, parent=None, drop_opt=[], roller_mode="LV_ROLLER_MODE_NORMAL", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 
         self["__roller_opt"] = drop_opt
-        self["lv_roller_set_options"] = [self.roller_opt_name, "LV_ROLLER_MODE_NORMAL"]
+        self["lv_roller_set_options"] = [self.roller_opt_name, roller_mode]
 
     @property
     def roller_opt_name(self):
