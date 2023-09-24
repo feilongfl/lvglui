@@ -95,7 +95,7 @@ class LvObject(list):
 
     def children(self, **kwargs):
         if "children" in kwargs:
-            print(f"{self.__class__.__name__}: {self}: {kwargs}")
+            # print(f"{self.__class__.__name__}: {self}: {kwargs}")
             for child in kwargs["children"]:
                 child.parent = self
                 self.append(child)
