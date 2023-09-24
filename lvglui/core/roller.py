@@ -1,7 +1,7 @@
-from ..basic import LvObject
+from ..basic import stateless_widget
 
 
-class roller(LvObject):
+class roller(stateless_widget):
     def __init__(self, parent=None, drop_opt=[], roller_mode="LV_ROLLER_MODE_NORMAL", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 

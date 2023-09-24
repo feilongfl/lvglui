@@ -1,5 +1,5 @@
-from ..basic import LvObject
+from ..basic import stateless_widget
 
 
-class screen(LvObject):
+class screen(stateless_widget):
     pass

@@ -1,7 +1,7 @@
-from ..basic import LvObject
+from ..basic import stateless_widget
 
 
-class textarea(LvObject):
+class textarea(stateless_widget):
     @property
     def create_func(self):
         return "lv_textarea_create"

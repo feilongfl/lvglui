@@ -1,1 +1,1 @@
-from .obj import LvObject
+from .stateless_widget import stateless_widget

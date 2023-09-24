@@ -1,7 +1,7 @@
-from ..basic import LvObject
+from ..basic import stateless_widget
 
 
-class image(LvObject):
+class image(stateless_widget):
     def __init__(self, parent=None, src="", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 
