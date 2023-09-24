@@ -70,16 +70,19 @@ class LvObject(list):
 
     def children(self, **kwargs):
         if "children" in kwargs:
-            # print(f"{self.__class__.__name__}: {self}: {kwargs}")
             for child in kwargs["children"]:
                 child.parent = self
                 self.append(child)
 
-    def get_children(self):
-        ret = [self]
+    def get_children(self, _include_self=True):
+        ret = []
+
+        if _include_self:
+            ret.append(self)
+
         for child in self:
             ret.append(child)
-            ret.extend(child)
+            ret.extend(child.get_children(_include_self=False))
 
         return ret
 
