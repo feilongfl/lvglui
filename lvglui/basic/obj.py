@@ -12,7 +12,7 @@ class LvObject(list):
         self.parent = parent
         self._attribute = {}
 
-        self.children(**kwargs)
+        self._parse_init_kwargs(**kwargs)
         self.build()
 
     @property
@@ -68,11 +68,27 @@ class LvObject(list):
     def build(self):
         pass
 
-    def children(self, **kwargs):
+    def _parse_children(self, **kwargs):
         if "children" in kwargs:
             for child in kwargs["children"]:
                 child.parent = self
                 self.append(child)
+
+    def _parse_attr(self, **kwargs):
+        if "attr" in kwargs:
+            for attr, val in kwargs["attr"].items():
+                self[attr] = val
+
+    def _parse_event(self, **kwargs):
+        if "event" in kwargs.keys():
+            self['@event'] = kwargs["event"]
+        else:
+            self['@event'] = []
+
+    def _parse_init_kwargs(self, **kwargs):
+        self._parse_children(**kwargs)
+        self._parse_attr(**kwargs)
+        self._parse_event(**kwargs)
 
     def get_children(self, _include_self=True):
         ret = []

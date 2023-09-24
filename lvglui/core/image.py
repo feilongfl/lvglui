@@ -5,7 +5,7 @@ class image(stateless_widget):
     def __init__(self, parent=None, src="", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 
-        self["@LV_IMG_DECLARE"] = [f"{src}"]
+        self["!LV_IMG_DECLARE"] = [f"{src}"]
         self["lv_img_set_src"] = [f"&{src}"]
 
         # todo: auto generate imgsrc from asserts

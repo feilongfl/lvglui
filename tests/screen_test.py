@@ -20,6 +20,9 @@ class DemoScreen(lvglui.core.screen):
                     children=[
                         lvglui.core.label(self, "Click"),
                     ],
+                    event=[
+                        'LV_EVENT_ALL',
+                    ]
                 ),
             ]
         )
