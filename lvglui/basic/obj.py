@@ -100,6 +100,14 @@ class LvObject(list):
                 child.parent = self
                 self.append(child)
 
+    def get_children(self):
+        ret = [self]
+        for child in self:
+            ret.append(child)
+            ret.extend(child)
+
+        return ret
+
     def __str__(self):
         return self.name
 
