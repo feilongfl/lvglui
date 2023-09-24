@@ -1,5 +1,4 @@
 import os
-from mako.template import Template
 from mako.lookup import TemplateLookup
 
 from ...basic.obj import LvObject
@@ -8,10 +7,9 @@ from ..base import generator
 
 class tamplate_generator(generator):
     def __init__(self, lvobj: LvObject) -> None:
-        super().__init__()
+        super().__init__(lvobj)
 
         self.lut = TemplateLookup(directories=[os.path.dirname(__file__)])
-        self.lvobj = lvobj
 
     @property
     def _file_descript_headers(self) -> str:
@@ -29,8 +27,7 @@ class tamplate_generator(generator):
         }
 
     def generate(self, outdir="gen"):
-        if not os.path.exists(outdir):
-            os.makedirs(outdir)
+        super().generate(outdir=outdir)
 
         for gen_file, gen_tpl in self.generator.items():
             with open(os.path.join(outdir, gen_file), "w") as f:
