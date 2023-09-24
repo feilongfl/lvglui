@@ -1,5 +1,6 @@
 from typing import Any
 import uuid
+from deprecated import deprecated
 from loguru import logger
 
 OBJ_NAME_PREFIX = "lvglobj_"
@@ -63,6 +64,7 @@ class LvObject(list):
     def raw_attribute(self):
         return None
 
+    @deprecated
     def define(self):
         define_map = [
             "",
@@ -101,6 +103,7 @@ class LvObject(list):
     def __str__(self):
         return self.name
 
+    @deprecated
     def generate(self):
         logger.debug(f"generate call: {self}: children->{[obj.name for obj in self]}")
         return self.define() + "\n" + "\n".join([obj.generate() for obj in self])
