@@ -10,6 +10,7 @@ python = "^3.11"
 pytest = "^7.4.2"
 loguru = "^0.7.2"
 mako = "^1.2.4"
+deprecated = "^1.2.14"
 
 
 [tool.poetry.group.dev.dependencies]
