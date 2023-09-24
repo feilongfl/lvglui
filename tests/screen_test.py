@@ -1,4 +1,5 @@
 import lvglui
+from lvglui.generator.tamplate import tamplate_generator
 
 
 class DemoScreen(lvglui.core.screen):
@@ -26,18 +27,4 @@ class DemoScreen(lvglui.core.screen):
 
 def test_screen(caplog):
     scn = DemoScreen(name="demo_scn")
-    with open("gen/demoscreen.c", "w") as f:
-        f.write(
-            """
-lv_obj_t *lvui_screen_create(lv_obj_t *parent)
-{
-"""
-        )
-        f.write(scn.generate())
-        f.write(
-            """
-\treturn %s;
-}
-"""
-            % scn.name
-        )
+    tamplate_generator(scn).generate(outdir='gen/test_screen')
