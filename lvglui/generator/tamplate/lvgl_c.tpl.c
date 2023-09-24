@@ -14,10 +14,10 @@ lv_obj_t *lvglui_create_${lvobj.name}(lv_obj_t *parent) {
     /* lvglui: ${obj.__class__.__name__}: ${obj.full_name}: ATTRIBUTE */
 % for attr, val in obj.attributes.items():
 % if attr.startswith("@"):
-    ${attr}(${','.join(val)});
+    ${attr}(${','.join([str(v) for v in val])});
 % elif attr.startswith("__"):
 % else:
-    ${attr}(${', '.join([obj.name, *val])});
+    ${attr}(${', '.join([obj.name, *[str(v) for v in val]])});
 % endif
 % endfor
 
