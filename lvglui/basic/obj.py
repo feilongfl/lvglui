@@ -9,7 +9,7 @@ class LvObject(list):
         self._name = kwargs.get("name", f"{OBJ_NAME_PREFIX}{uuid.uuid4()}").replace(
             "-", "_"
         )
-        self.parent = parent
+        self._parent = parent
         self._attribute = {}
 
         self._parse_init_kwargs(**kwargs)
@@ -59,7 +59,7 @@ class LvObject(list):
         if self.parent == "parent":
             return self.name
 
-        return f"{self.parent.full_name}/{self.name}"
+        return f"{self.parent.full_name}__{self.name}"
 
     @property
     def raw_attribute(self):
@@ -81,9 +81,9 @@ class LvObject(list):
 
     def _parse_event(self, **kwargs):
         if "event" in kwargs.keys():
-            self['@event'] = kwargs["event"]
+            self['__event'] = kwargs["event"]
         else:
-            self['@event'] = []
+            self['__event'] = []
 
     def _parse_init_kwargs(self, **kwargs):
         self._parse_children(**kwargs)
