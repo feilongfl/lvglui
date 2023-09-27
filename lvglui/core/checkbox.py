@@ -1,7 +1,7 @@
-from ..basic import LvObject
+from ..basic import stateless_widget
 
 
-class checkbox(LvObject):
+class checkbox(stateless_widget):
     def __init__(self, parent=None, text="", **kwargs) -> None:
         super().__init__(parent, **kwargs)
 

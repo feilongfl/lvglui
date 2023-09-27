@@ -1,7 +1,7 @@
-from ..basic import LvObject
+from ..basic import stateless_widget
 
 
-class button_mutrix(LvObject):
+class button_mutrix(stateless_widget):
     def __init__(self, parent=None, button_map=[], **kwargs) -> None:
         super().__init__(parent, **kwargs)
 

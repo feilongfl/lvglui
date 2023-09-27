@@ -20,6 +20,9 @@ class DemoScreen(lvglui.core.screen):
                     children=[
                         lvglui.core.label(self, "Click"),
                     ],
+                    event=[
+                        'LV_EVENT_ALL',
+                    ]
                 ),
             ]
         )
@@ -27,4 +30,5 @@ class DemoScreen(lvglui.core.screen):
 
 def test_screen(caplog):
     scn = DemoScreen(name="demo_scn")
+    print(scn.parent)
     tamplate_generator(scn).generate(outdir='gen/test_screen')

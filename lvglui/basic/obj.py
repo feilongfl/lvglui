@@ -9,10 +9,10 @@ class LvObject(list):
         self._name = kwargs.get("name", f"{OBJ_NAME_PREFIX}{uuid.uuid4()}").replace(
             "-", "_"
         )
-        self.parent = parent
+        self._parent = parent
         self._attribute = {}
 
-        self.children(**kwargs)
+        self._parse_init_kwargs(**kwargs)
         self.build()
 
     @property
@@ -46,7 +46,10 @@ class LvObject(list):
         return self._attribute
 
     def __setitem__(self, __name: str, __value: Any) -> None:
-        self._attribute[__name] = __value
+        if isinstance(__value, list):
+            self._attribute[__name] = __value
+        else:
+            self._attribute[__name] = [__value]
 
     def __getitem__(self, __name: str) -> None:
         return self._attribute[__name]
@@ -56,7 +59,7 @@ class LvObject(list):
         if self.parent == "parent":
             return self.name
 
-        return f"{self.parent.full_name}/{self.name}"
+        return f"{self.parent.full_name}__{self.name}"
 
     @property
     def raw_attribute(self):
@@ -65,18 +68,37 @@ class LvObject(list):
     def build(self):
         pass
 
-    def children(self, **kwargs):
+    def _parse_children(self, **kwargs):
         if "children" in kwargs:
-            # print(f"{self.__class__.__name__}: {self}: {kwargs}")
             for child in kwargs["children"]:
                 child.parent = self
                 self.append(child)
 
-    def get_children(self):
-        ret = [self]
+    def _parse_attr(self, **kwargs):
+        if "attr" in kwargs:
+            for attr, val in kwargs["attr"].items():
+                self[attr] = val
+
+    def _parse_event(self, **kwargs):
+        if "event" in kwargs.keys():
+            self['__event'] = kwargs["event"]
+        else:
+            self['__event'] = []
+
+    def _parse_init_kwargs(self, **kwargs):
+        self._parse_children(**kwargs)
+        self._parse_attr(**kwargs)
+        self._parse_event(**kwargs)
+
+    def get_children(self, _include_self=True):
+        ret = []
+
+        if _include_self:
+            ret.append(self)
+
         for child in self:
             ret.append(child)
-            ret.extend(child)
+            ret.extend(child.get_children(_include_self=False))
 
         return ret
 
